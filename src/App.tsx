@@ -9,13 +9,11 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
       setLoading(false);
     });
 
-    // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUser(session?.user ?? null);
@@ -26,9 +24,7 @@ function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  const handleAuthSuccess = () => {
-    // User is now authenticated, state will update via onAuthStateChange
-  };
+  const handleAuthSuccess = () => {};
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -37,10 +33,10 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-900 via-teal-800 to-cyan-900">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-950 via-teal-900 to-cyan-950">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-amber-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-white text-xl">Yükleniyor...</p>
+          <div className="w-20 h-20 border-4 border-amber-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-white text-xl font-semibold">Yükleniyor...</p>
         </div>
       </div>
     );
