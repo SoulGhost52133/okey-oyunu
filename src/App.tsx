@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from './lib/supabase';
 import AuthForm from './components/AuthForm';
-import GameBoard from './components/GameBoard';
+import RealisticGameBoard from './components/RealisticGameBoard';
 import type { User } from '@supabase/supabase-js';
 
 function App() {
@@ -51,7 +51,7 @@ function App() {
       {!user ? (
         <AuthForm onAuthSuccess={handleAuthSuccess} />
       ) : (
-        <GameBoard user={{ id: user.id, email: user.email || '' }} onLeaveGame={handleSignOut} />
+        <RealisticGameBoard user={{ id: user.id, email: user.email || '' }} onLeaveGame={handleSignOut} />
       )}
     </>
   );
